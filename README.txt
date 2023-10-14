@@ -26,7 +26,6 @@ Whitelist and Blacklist:
 Whitelist: Priority queue that sorts campaigns immediately upon insertion based on priority parameters.
 Blacklist: Holds each user's campaigns to be ignored in future matches.
 Implementation Details
-The program is developed using Spring Boot, a Java-based framework for building robust and scalable applications.
 The caching mechanism includes a two-layered approach: local service cache and external Redis cache.
 Scheduled tasks are managed using Spring's scheduling features.
 Multi-threading and parallel processing are utilized for efficient user-campaign matching.
