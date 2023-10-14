@@ -15,7 +15,9 @@ import java.util.PriorityQueue;
 @Entity
 @Table(name = "profiles")
 public class User {
-
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
     private HashSet<Integer> attributes;
     private HashSet<Integer> blacklist;
