@@ -1,17 +1,33 @@
-This program is a Real Time Bidding engine with 2 layers of cache implimented
+Real Time Bidding Engine
+This program implements a Real Time Bidding engine with 2 layers of cache.
 
-1. anonynous user will be registered to the users DB with new attributes
-2. existing user will just update his data to the DB
-3. user request for campaign will initially check the local service cache for campaign queue
-4. if not found it will turn to the external Redis data immplimented here as TreeMap but also with exytensive Redis Service real methods
-5. if not found in redis then forced to get data from the users DB
+Functionality
+Anonymous User Registration:
 
-6. schedulaed tasks are: 
-- every 6 hours complete campaign match between users DB and campaigns DB and by that also updating the Redis
-- every 1 hour the local cache is taking the most hits users from the Redis
-- every 3 hours Redis Cache eviction will make room for new users
+Anonymous users are registered in the users database with new attributes.
+Existing User Update:
 
-7. the major operation of matching users to campaigns offline is multi threaded java8 streams immplimented
-8. whitelist is a priority queue which sorts the campaigns immidiatly upon insertion based on the priority parameters
-9. blacklist will hold each users campaigns to be ignored from future match
+Existing users can update their data in the database.
+Campaign Request Handling:
 
+When a user requests a campaign, the system checks the local service cache for the campaign queue.
+If not found, it looks in the external Redis data implemented as a TreeMap, along with extensive Redis Service real methods.
+If the campaign is not found in Redis, it retrieves the data from the users database.
+Scheduled Tasks:
+
+Every 6 hours, a complete campaign match is performed between the users database and campaigns database, updating Redis accordingly.
+Every 1 hour, the local cache fetches the most accessed users from Redis.
+Every 3 hours, Redis cache eviction is performed to make room for new users.
+Multi-threaded User-Campaign Matching:
+
+The major operation of matching users to campaigns offline is implemented using multi-threaded Java 8 streams.
+Whitelist and Blacklist:
+
+Whitelist: Priority queue that sorts campaigns immediately upon insertion based on priority parameters.
+Blacklist: Holds each user's campaigns to be ignored in future matches.
+Implementation Details
+The program is developed using Spring Boot, a Java-based framework for building robust and scalable applications.
+The caching mechanism includes a two-layered approach: local service cache and external Redis cache.
+Scheduled tasks are managed using Spring's scheduling features.
+Multi-threading and parallel processing are utilized for efficient user-campaign matching.
+Whitelist and blacklist functionalities help in prioritizing and filtering campaigns.
